@@ -2,7 +2,7 @@
 #include <Quantity_Color.hxx>
 #include <Graphic3d_MaterialAspect.hxx>
 
-namespace OCCEasyDrawing
+namespace OccEasyDrawing
 {
 	struct ShapeRenderStyle
 	{
