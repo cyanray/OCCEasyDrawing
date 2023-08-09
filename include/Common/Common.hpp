@@ -7,7 +7,7 @@
 
 #include <tuple>
 
-namespace OccEasyDrawing
+namespace OCCEasyDrawing
 {
 	using AISObjects = NCollection_Vector<Handle(AIS_InteractiveObject)>;
 

@@ -13,7 +13,7 @@
 #include <stdexcept>
 #include <Eigen/Dense>
 
-namespace OccEasyDrawing
+namespace OCCEasyDrawing
 {
 	void DisplayObject(const ViewerHandles& handles, const AISObjects& objs)
 	{

@@ -10,7 +10,7 @@
 
 #include <vector>
 
-namespace OccEasyDrawing
+namespace OCCEasyDrawing
 {
 	const static ShapeRenderStyle DefaultShapeRenderStyle{};
 
