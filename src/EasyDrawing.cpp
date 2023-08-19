@@ -3,12 +3,14 @@
 #include <gp_Pnt.hxx>
 #include <TopoDS_Wire.hxx>
 #include <TopoDS_Face.hxx>
+#include <AIS_Point.hxx>
 #include <AIS_ColoredShape.hxx>
 #include <BRepBuilderAPI_MakePolygon.hxx>
 #include <BRepBuilderAPI_MakeFace.hxx>
 #include <GeomAPI_PointsToBSplineSurface.hxx>
 #include <Geom_Surface.hxx>
 #include <Geom_BSplineSurface.hxx>
+#include <Geom_CartesianPoint.hxx>
 
 #include <stdexcept>
 #include <Eigen/Dense>
@@ -79,4 +81,9 @@ namespace OccEasyDrawing
 		ApplyShapeRenderStyle(aisFace, DefaultShapeRenderStyle);
 		return aisFace;
 	}
+
+    Handle(AIS_InteractiveObject) MakePoint(const gp_Pnt& pt)
+    {
+        return new AIS_Point(new Geom_CartesianPoint(pt));
+    }
 }
