@@ -26,10 +26,9 @@ namespace OccEasyDrawing
 {
 	void DisplayObject(const ViewerHandles& handles, const AISObjects& objs)
 	{
-		for (NCollection_Vector<Handle(AIS_InteractiveObject)>::Iterator anIter(objs); anIter.More(); anIter.Next())
+		for (const auto& obj:objs)
 		{
-			const Handle(AIS_InteractiveObject)& anObject = anIter.Value();
-			handles.Context->Display(anObject, Standard_False);
+			handles.Context->Display(obj, Standard_False);
 		}
 		handles.View->Redraw();
 		handles.View->FitAll();

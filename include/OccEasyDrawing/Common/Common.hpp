@@ -4,12 +4,13 @@
 #include <NCollection_Vector.hxx>
 #include <V3d_View.hxx>
 #include <AIS_InteractiveObject.hxx>
+#include <vector>
 
 #include <tuple>
 
 namespace OccEasyDrawing
 {
-	using AISObjects = NCollection_Vector<Handle(AIS_InteractiveObject)>;
+	using AISObjects = std::vector<Handle(AIS_InteractiveObject)>;
 
 	struct ViewerHandles
 	{
