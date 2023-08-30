@@ -21,16 +21,18 @@ namespace OccEasyDrawing
 
 	void DisplayObject(const ViewerHandles& handles, const AISObjects& objs);
 
-	void DisplayObject(const ViewerHandles& handles, Handle(AIS_InteractiveObject) obj);
+	void DisplayObject(const ViewerHandles& handles, const Handle(AIS_InteractiveObject)& obj);
 
 	void ApplyShapeRenderStyle(Handle(AIS_ColoredShape)& shape, const ShapeRenderStyle& style);
 
     Handle(AIS_InteractiveObject) MakePoint(const gp_Pnt& pt);
 
-	Handle(AIS_ColoredShape) MakePolygonPlane(const gp_Pnt& p1, const gp_Pnt& p2, const gp_Pnt& p3);
+    Handle(AIS_InteractiveObject) MakeLine(const gp_Pnt& pt1, const gp_Pnt& pt2);
 
-	Handle(AIS_ColoredShape) MakePolygonPlane(const gp_Pnt& p1, const gp_Pnt& p2, const gp_Pnt& p3, const gp_Pnt& p4);
+	Handle(AIS_InteractiveObject) MakePolygonPlane(const gp_Pnt& p1, const gp_Pnt& p2, const gp_Pnt& p3);
 
-	Handle(AIS_ColoredShape) MakePolygonBSplineSurface(const std::vector<Eigen::Vector3d>& vertex);
+	Handle(AIS_InteractiveObject) MakePolygonPlane(const gp_Pnt& p1, const gp_Pnt& p2, const gp_Pnt& p3, const gp_Pnt& p4);
+
+	Handle(AIS_InteractiveObject) MakePolygonBSplineSurface(const std::vector<Eigen::Vector3d>& vertex);
 
 }

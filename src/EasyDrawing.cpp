@@ -1,3 +1,6 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+
 #include "OccEasyDrawing/EasyDrawing.hpp"
 
 #include <gp_Pnt.hxx>
@@ -14,6 +17,10 @@
 
 #include <stdexcept>
 #include <Eigen/Dense>
+#include <AIS_Line.hxx>
+#include <GC_MakeLine.hxx>
+#include <GC_MakeSegment.hxx>
+#include <BRepBuilderAPI_MakeEdge.hxx>
 
 namespace OccEasyDrawing
 {
@@ -28,7 +35,7 @@ namespace OccEasyDrawing
 		handles.View->FitAll();
 	}
 
-	void DisplayObject(const ViewerHandles& handles, Handle(AIS_InteractiveObject) obj)
+	void DisplayObject(const ViewerHandles& handles, const Handle(AIS_InteractiveObject)& obj)
 	{
 		handles.Context->Display(obj, Standard_False);
 		handles.View->Redraw();
@@ -42,23 +49,23 @@ namespace OccEasyDrawing
 		shape->SetTransparency(style.Transparency);
 	}
 
-	Handle(AIS_ColoredShape) MakePolygonPlane(const gp_Pnt& p1, const gp_Pnt& p2, const gp_Pnt& p3)
+	Handle(AIS_InteractiveObject) MakePolygonPlane(const gp_Pnt& p1, const gp_Pnt& p2, const gp_Pnt& p3)
 	{
 		TopoDS_Wire wire = BRepBuilderAPI_MakePolygon(p1, p2, p3, Standard_True);
 		Handle(AIS_ColoredShape) aisFace = new AIS_ColoredShape(BRepBuilderAPI_MakeFace(wire, Standard_True).Shape());
 		ApplyShapeRenderStyle(aisFace, DefaultShapeRenderStyle);
-		return aisFace;
+		return {aisFace};
 	}
 
-	Handle(AIS_ColoredShape) MakePolygonPlane(const gp_Pnt& p1, const gp_Pnt& p2, const gp_Pnt& p3, const gp_Pnt& p4)
+	Handle(AIS_InteractiveObject) MakePolygonPlane(const gp_Pnt& p1, const gp_Pnt& p2, const gp_Pnt& p3, const gp_Pnt& p4)
 	{
 		TopoDS_Wire wire = BRepBuilderAPI_MakePolygon(p1, p2, p3, p4, Standard_True);
 		Handle(AIS_ColoredShape) aisFace = new AIS_ColoredShape(BRepBuilderAPI_MakeFace(wire, Standard_True).Shape());
 		ApplyShapeRenderStyle(aisFace, DefaultShapeRenderStyle);
-		return aisFace;
+		return {aisFace};
 	}
 
-	Handle(AIS_ColoredShape) MakePolygonBSplineSurface(const std::vector<Eigen::Vector3d>& vertex)
+	Handle(AIS_InteractiveObject) MakePolygonBSplineSurface(const std::vector<Eigen::Vector3d>& vertex)
 	{
 		if (vertex.size() > 4)
 		{
@@ -74,16 +81,22 @@ namespace OccEasyDrawing
 		}
 
 		Handle(Geom_BSplineSurface) pSurface = GeomAPI_PointsToBSplineSurface(Array);
-		auto gsur = Handle(Geom_Surface)::handle(static_cast<Geom_Surface*>(pSurface.get()));
+		auto gSurface = Handle(Geom_Surface){static_cast<Geom_Surface*>(pSurface.get())};
 
-		auto tmp = BRepBuilderAPI_MakeFace(gsur, 1e-6);
+		auto tmp = BRepBuilderAPI_MakeFace(gSurface, 1e-6);
 		Handle(AIS_ColoredShape) aisFace = new AIS_ColoredShape(tmp.Shape());
 		ApplyShapeRenderStyle(aisFace, DefaultShapeRenderStyle);
-		return aisFace;
+		return {aisFace};
 	}
 
     Handle(AIS_InteractiveObject) MakePoint(const gp_Pnt& pt)
     {
-        return new AIS_Point(new Geom_CartesianPoint(pt));
+        return {new AIS_Point(new Geom_CartesianPoint(pt))};
+    }
+
+    Handle(AIS_InteractiveObject) MakeLine(const gp_Pnt& pt1, const gp_Pnt& pt2)
+    {
+        return {new AIS_ColoredShape(BRepBuilderAPI_MakeEdge(GC_MakeSegment(pt1, pt2).Value()).Shape())};
     }
 }
+#pragma clang diagnostic pop
