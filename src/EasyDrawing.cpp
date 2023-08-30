@@ -1,4 +1,4 @@
-#include "EasyDrawing/EasyDrawing.hpp"
+#include "OccEasyDrawing/EasyDrawing.hpp"
 
 #include <gp_Pnt.hxx>
 #include <TopoDS_Wire.hxx>

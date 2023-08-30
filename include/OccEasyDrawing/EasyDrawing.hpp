@@ -1,6 +1,6 @@
 #pragma once
-#include "Common/Common.hpp"
-#include "Common/ShapeRenderStyle.hpp"
+#include "OccEasyDrawing/Common/Common.hpp"
+#include "OccEasyDrawing/Common/ShapeRenderStyle.hpp"
 #include <gp_Pnt.hxx>
 #include <AIS_InteractiveContext.hxx>
 #include <AIS_InteractiveObject.hxx>

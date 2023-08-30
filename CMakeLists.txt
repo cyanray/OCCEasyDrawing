@@ -9,9 +9,9 @@ find_package(OpenCASCADE CONFIG REQUIRED PATHS ${OpenCASCADE_DIR})
 find_package(Eigen3 CONFIG REQUIRED)
 
 set(SOURCES 
-	"include/Common/Common.hpp"
-	"include/Common/ShapeRenderStyle.hpp"
-	"include/EasyDrawing/EasyDrawing.hpp"
+	"include/OccEasyDrawing/Common/Common.hpp"
+	"include/OccEasyDrawing/Common/ShapeRenderStyle.hpp"
+	"include/OccEasyDrawing/EasyDrawing.hpp"
 	"src/EasyDrawing.cpp")
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
