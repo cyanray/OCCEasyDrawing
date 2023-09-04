@@ -267,7 +267,7 @@ ServiceFabricBackup/
 *.ndf
 
 # Business Intelligence projects
-*.rdl.data
+*.rdl.std_list
 *.bim.layout
 *.bim_*.settings
 *.rptproj.rsuser
